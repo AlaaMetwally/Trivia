@@ -91,9 +91,10 @@ RETURN : all categories
 } 
 "success": true
 }
-
+```
 URL : curl http://127.0.0.1:5000/questions
 RETURN : all questions
+```
 {
   "categories": {
     "1": "Science", 
@@ -178,15 +179,15 @@ RETURN : all questions
   "success": true, 
   "total_questions": 19
 }
-
+```
 URL : curl http://127.0.0.1:5000/questions/1 -X DELETE
 RETURN : delete a question of id 1
-
+```
 {
     "succcess": "True",
     "messages": "Question has been deleted successfully"
 }
-
+```
 URL : curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{
       "answer": "The Palace of Versailles", 
       "category": "3", 
@@ -200,10 +201,11 @@ RETURN : new question is created
     "succcess": "True",
     "messages": "Question has been created successfully"
 }
+```
 
 URL : curl http://127.0.0.1:5000/questions/search -X POST -H "Content-Type: application/json" -d '{"searchTerm": "soccer"}'
 RETURN : return questions
-
+```
 {
   "questions": [{
       "answer": "Brazil", 
@@ -215,10 +217,10 @@ RETURN : return questions
   "success": true, 
   "total_questions": 19
 }
-
+```
 URL : curl http://127.0.0.1:5000/categories/1/questions
 RETURN : questions of category using category id
-
+```
 {
   "current_category": "Science", 
   "questions": [
@@ -247,10 +249,10 @@ RETURN : questions of category using category id
   "success": true, 
   "total_questions": 3
 }
-
+```
 URL : curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [1, 5], "quiz_category": {"type": "Entertainment", "id": "5"}}'
 RETURN : 
-
+```
 {
   "question": {
     "answer": "Apollo 13", 
@@ -261,7 +263,7 @@ RETURN :
   }, 
   "success": true
 }
-
+```
 ## Testing
 To run the tests, run
 ```
