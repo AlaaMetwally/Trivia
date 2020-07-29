@@ -51,7 +51,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['categories'])
-        self.assertEqual(len(data['categories']), 1)
+        self.assertEqual(len(data['categories']), 6)
 
     def test_get_questions(self):
 
@@ -140,9 +140,33 @@ class TriviaTestCase(unittest.TestCase):
         self.assertNotEqual(data['question']['id'], 1)
         self.assertNotEqual(data['question']['id'], 2)
 
-        self.assertEqual(data['question']['category'], '1')
+        self.assertEqual(data['question']['category'], 1)
 
+    def test_error_out_of_bound_page(self):
 
-# Make the tests conveniently executable
+        response = self.client().get('/questions?page=100')
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'Resource not found')
+
+    def test_category_not_found(self):
+
+        response = self.client().get('/categories/133/questions')
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 422)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'Unprocessable entity')
+
+    def test_no_quiz_displayed(self):
+        response = self.client().post('/quizzes', json={})
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'Bad request error')
+
 if __name__ == "__main__":
     unittest.main()
