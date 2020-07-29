@@ -251,6 +251,7 @@ RETURN : questions of category using category id
 }
 ```
 URL : curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [1, 5], "quiz_category": {"type": "Entertainment", "id": "5"}}'
+<br>
 RETURN : 
 ```
 {
