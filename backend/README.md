@@ -81,6 +81,7 @@ GET '/categories'
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
 URL : curl http://127.0.0.1:5000/categories
+<br>
 RETURN : all categories
 {'1' : "Science",
 '2' : "Art",
@@ -93,6 +94,7 @@ RETURN : all categories
 }
 ```
 URL : curl http://127.0.0.1:5000/questions
+<br>
 RETURN : all questions
 ```
 {
@@ -181,6 +183,7 @@ RETURN : all questions
 }
 ```
 URL : curl http://127.0.0.1:5000/questions/1 -X DELETE
+<br>
 RETURN : delete a question of id 1
 ```
 {
@@ -195,6 +198,7 @@ URL : curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application
       "id": 14, 
       "question": "In which royal palace would you find the Hall of Mirrors?"
     }'
+<br>
 RETURN : new question is created 
 ```
 {
@@ -204,6 +208,7 @@ RETURN : new question is created
 ```
 
 URL : curl http://127.0.0.1:5000/questions/search -X POST -H "Content-Type: application/json" -d '{"searchTerm": "soccer"}'
+<br>
 RETURN : return questions
 ```
 {
@@ -219,6 +224,7 @@ RETURN : return questions
 }
 ```
 URL : curl http://127.0.0.1:5000/categories/1/questions
+<br>
 RETURN : questions of category using category id
 ```
 {
@@ -252,7 +258,7 @@ RETURN : questions of category using category id
 ```
 URL : curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [1, 5], "quiz_category": {"type": "Entertainment", "id": "5"}}'
 <br>
-RETURN : 
+RETURN : random question not in previous questions
 ```
 {
   "question": {
