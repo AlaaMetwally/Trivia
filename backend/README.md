@@ -80,15 +80,187 @@ GET '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
+URL : curl http://127.0.0.1:5000/categories
+RETURN : all categories
 {'1' : "Science",
 '2' : "Art",
 '3' : "Geography",
 '4' : "History",
 '5' : "Entertainment",
-'6' : "Sports"}
+'6' : "Sports"
+} 
+"success": true
+}
 
+URL : curl http://127.0.0.1:5000/questions
+RETURN : all questions
+{
+  "categories": {
+    "1": "Science", 
+    "2": "Art", 
+    "3": "Geography", 
+    "4": "History", 
+    "5": "Entertainment", 
+    "6": "Sports"
+  }, 
+  "questions": [
+    {
+      "answer": "Apollo 13", 
+      "category": "5", 
+      "difficulty": 4, 
+      "id": 2, 
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination in 1996?"
+    }, 
+    {
+      "answer": "Tom Cruise", 
+      "category": "5", 
+      "difficulty": 4, 
+      "id": 4, 
+      "question": "What actor did author Anne Rice first denounce then praise in the role of her beloved Lestat?"
+    }, 
+    {
+      "answer": "Maya Angelou", 
+      "category": "4", 
+      "difficulty": 2, 
+      "id": 5, 
+      "question": "Whose autobiography is entitled I Know Why the Caged Bird Sings?"
+    }, 
+    {
+      "answer": "Edward Scissorhands", 
+      "category": "5", 
+      "difficulty": 3, 
+      "id": 6, 
+      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
+    }, 
+    {
+      "answer": "Muhammad Ali", 
+      "category": "4", 
+      "difficulty": 1, 
+      "id": 9, 
+      "question": "What boxers original name is Cassius Clay?"
+    }, 
+    {
+      "answer": "Brazil", 
+      "category": "6", 
+      "difficulty": 3, 
+      "id": 10, 
+      "question": "Which is the only team to play in every soccer World Cup tournament?"
+    }, 
+    {
+      "answer": "Uruguay", 
+      "category": "6", 
+      "difficulty": 4, 
+      "id": 11, 
+      "question": "Which country won the first ever soccer World Cup in 1930?"
+    }, 
+    {
+      "answer": "George Washington Carver", 
+      "category": "4", 
+      "difficulty": 2, 
+      "id": 12, 
+      "question": "Who invented Peanut Butter?"
+    }, 
+    {
+      "answer": "Lake Victoria", 
+      "category": "3", 
+      "difficulty": 2, 
+      "id": 13, 
+      "question": "What is the largest lake in Africa?"
+    }, 
+    {
+      "answer": "The Palace of Versailles", 
+      "category": "3", 
+      "difficulty": 3, 
+      "id": 14, 
+      "question": "In which royal palace would you find the Hall of Mirrors?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 19
+}
+
+URL : curl http://127.0.0.1:5000/questions/1 -X DELETE
+RETURN : delete a question of id 1
+
+{
+    "succcess": "True",
+    "messages": "Question has been deleted successfully"
+}
+
+URL : curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{
+      "answer": "The Palace of Versailles", 
+      "category": "3", 
+      "difficulty": 3, 
+      "id": 14, 
+      "question": "In which royal palace would you find the Hall of Mirrors?"
+    }'
+RETURN : new question is created 
 ```
+{
+    "succcess": "True",
+    "messages": "Question has been created successfully"
+}
 
+URL : curl http://127.0.0.1:5000/questions/search -X POST -H "Content-Type: application/json" -d '{"searchTerm": "soccer"}'
+RETURN : return questions
+
+{
+  "questions": [{
+      "answer": "Brazil", 
+      "category": "6", 
+      "difficulty": 3, 
+      "id": 10, 
+      "question": "Which is the only team to play in every soccer World Cup tournament?"
+    }], 
+  "success": true, 
+  "total_questions": 19
+}
+
+URL : curl http://127.0.0.1:5000/categories/1/questions
+RETURN : questions of category using category id
+
+{
+  "current_category": "Science", 
+  "questions": [
+    {
+      "answer": "The Liver", 
+      "category": "1", 
+      "difficulty": 4, 
+      "id": 20, 
+      "question": "What is the heaviest organ in the human body?"
+    }, 
+    {
+      "answer": "Alexander Fleming", 
+      "category": "1", 
+      "difficulty": 3, 
+      "id": 21, 
+      "question": "Who discovered penicillin?"
+    }, 
+    {
+      "answer": "Blood", 
+      "category": "1", 
+      "difficulty": 4, 
+      "id": 22, 
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 3
+}
+
+URL : curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions": [1, 5], "quiz_category": {"type": "Entertainment", "id": "5"}}'
+RETURN : 
+
+{
+  "question": {
+    "answer": "Apollo 13", 
+    "category": "5", 
+    "difficulty": 4, 
+    "id": 2, 
+    "question": "What movie earned Tom Hanks his third straight Oscar nomination in 1996?"
+  }, 
+  "success": true
+}
 
 ## Testing
 To run the tests, run
